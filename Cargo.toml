@@ -1,0 +1,17 @@
+[package]
+name = "wifi-pm"
+version = "0.1.0"
+edition = "2021"
+authors = ["p <ullu1221>"]
+description = "HPC Static Low-Latency Wi-Fi Power Management Controller"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/ullu1221/wifi-power-manager"
+
+[dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
