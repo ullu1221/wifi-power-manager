@@ -17,7 +17,9 @@ install: build
 	install -d $(DESTDIR)$(BINDIR)
 	install -m 755 target/release/wifi-pm $(DESTDIR)$(BINDIR)/wifi-pm
 	install -d $(DESTDIR)$(SYSTEMDDIR)
-	$(DESTDIR)$(BINDIR)/wifi-pm install
+ifeq ($(DESTDIR),)
+	$(BINDIR)/wifi-pm install
+endif
 
 uninstall:
 	systemctl disable --now wifi-pm.service 2>/dev/null || true
