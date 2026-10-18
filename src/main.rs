@@ -128,7 +128,11 @@ fn is_root() -> bool {
 /// Attempt transparent privilege elevation via sudo if not already elevated
 fn ensure_elevated() {
     if !is_root() && env::var("WIFI_PM_REEXEC").is_err() {
-        let exe = env::current_exe().unwrap_or_else(|_| std::path::PathBuf::from("/usr/local/bin/wifi-pm"));
+        let exe = if std::path::Path::new("/usr/local/bin/wifi-pm").is_file() {
+            std::path::PathBuf::from("/usr/local/bin/wifi-pm")
+        } else {
+            env::current_exe().unwrap_or_else(|_| std::path::PathBuf::from("/usr/local/bin/wifi-pm"))
+        };
         let status = process::Command::new("sudo")
             .env("WIFI_PM_REEXEC", "1")
             .arg(exe)

@@ -18,7 +18,7 @@ cargo build --release
 echo "=== Deploying Binary to /usr/local/bin/wifi-pm ==="
 sudo install -m 755 target/release/wifi-pm /usr/local/bin/wifi-pm
 mkdir -p "${TARGET_HOME}/.local/bin"
-install -m 755 target/release/wifi-pm "${TARGET_HOME}/.local/bin/wifi-pm" 2>/dev/null || true
+ln -sf /usr/local/bin/wifi-pm "${TARGET_HOME}/.local/bin/wifi-pm"
 
 echo "=== Configuring Sudoers NOPASSWD Rule ==="
 echo "${TARGET_USER} ALL=(ALL) NOPASSWD: /usr/local/bin/wifi-pm" | sudo tee /etc/sudoers.d/99-wifi-pm >/dev/null
