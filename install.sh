@@ -13,7 +13,7 @@ sudo install -m 755 target/release/wifi-pm /usr/local/bin/wifi-pm
 install -m 755 target/release/wifi-pm "${HOME}/.local/bin/wifi-pm" 2>/dev/null || true
 
 echo "=== Configuring Sudoers NOPASSWD Rule ==="
-echo "${USER} ALL=(ALL) NOPASSWD: /usr/local/bin/wifi-pm, ${HOME}/.local/bin/wifi-pm" | sudo tee /etc/sudoers.d/99-wifi-pm >/dev/null
+echo "${USER} ALL=(ALL) NOPASSWD: /usr/local/bin/wifi-pm" | sudo tee /etc/sudoers.d/99-wifi-pm >/dev/null
 sudo chmod 0440 /etc/sudoers.d/99-wifi-pm
 
 echo "=== Installing Systemd Service and NetworkManager Dispatcher ==="

@@ -1,7 +1,7 @@
 //! Command-line argument parser for wifi-pm.
 //! Zero external crate dependencies for static, deterministic execution.
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Action {
     Status,
     On,
@@ -11,9 +11,10 @@ pub enum Action {
     Install,
     Help,
     Version,
+    Unknown(String),
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone)]
 pub struct CliArgs {
     pub action: Action,
     pub no_persist: bool,
@@ -54,7 +55,10 @@ impl CliArgs {
                     action = Action::Version;
                     break;
                 }
-                _ => {}
+                other => {
+                    action = Action::Unknown(other.to_string());
+                    break;
+                }
             }
         }
 

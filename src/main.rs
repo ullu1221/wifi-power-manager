@@ -41,6 +41,11 @@ fn main() {
         Action::Install => {
             cmd_install();
         }
+        Action::Unknown(cmd) => {
+            eprintln!("[-] Error: Unknown command or option '{}'", cmd);
+            CliArgs::print_help();
+            process::exit(1);
+        }
     }
 }
 
